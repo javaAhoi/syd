@@ -47,15 +47,14 @@
 													<input style="width:200px;" name="name" class="form-control required" type="text" value="${record.name}" >
 												</div>
 												<div class="col-lg-4 col-md-4 marginB10">
-													<label>类型：</label>
-													<select style="min-width: 200px;width:auto;" class="type-select form-control">
-														<option value="">--请选择--</option>
-														<c:forEach items="${types}" var="record">
-															<option data-alternative-spellings="${record.pinyin}" <c:if test="${QueryModel.id eq record.id}">selected</c:if> value="${record.id }">${record.name }</option>
-														</c:forEach>
-													</select>
+													<label>分钟：</label>
+													<input style="width:70px;text-align:right;" name="minute" class="form-control required" type="text" value="${record.minute}" >分钟
 												</div>
-												<div class="col-lg-12 col-md-12 list_item_line">
+												<div class="col-lg-4 col-md-4 marginB10">
+													<label>上映时间：</label>
+													<input style="width:70px;text-align:right;" name="sy_time" class="form-control required" type="text" value="${record.minute}" >
+												</div>
+												<div class="col-lg-12 col-md-12 list_item_line type-div">
 													<label>类型：</label>
 													<ul>
 														<c:forEach items="${types}" var="record">
@@ -66,7 +65,38 @@
 														</c:forEach>
 													</ul>
 												</div>
-											</div> 
+												<div class="col-lg-12 col-md-12 list_item_line type-div">
+													<label>年代：</label>
+													<ul>
+														<c:forEach items="${years}" var="record">
+															<li>
+																<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																<label class="paddingLR10">${record.name }</label>
+															</li>
+														</c:forEach>
+													</ul>
+												</div>
+												<div class="col-lg-12 col-md-12 list_item_line type-div">
+													<label>地区：</label>
+													<ul>
+														<c:forEach items="${areas}" var="record">
+															<li>
+																<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																<label class="paddingLR10">${record.name }</label>
+															</li>
+														</c:forEach>
+													</ul>
+												</div>
+												<div class="col-lg-12 col-md-12 list_item_line type-div">
+													<label>演员：</label>
+													<ul>
+														<li>
+															<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+															<label class="paddingLR10">${record.name }</label>
+														</li>
+													</ul>
+												</div>
+											</div>  
 									  	</div>
 									</div>
 								</div>
