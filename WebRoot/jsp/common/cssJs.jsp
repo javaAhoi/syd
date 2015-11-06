@@ -10,9 +10,13 @@
 <link rel="stylesheet" href="${ctx}/resource/css/jNotify.jquery.css">
 <!-- 自定义 css -->
 <link rel="stylesheet" href="${ctx}/resource/css/css.css">
+<link rel="stylesheet" href="${ctx}/resource/autocomplete/autocomplete-ui.css" /> 
+
 
 <!-- 系统js -->
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
+<!-- autocomplete js-->
+<script type="text/javascript" src="${ctx}/resource/autocomplete/jquery.select-to-autocomplete.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap.min.js"></script>
 <!-- 表单验证和错误提示 js -->
 <script type="text/javascript" src="${ctx}/resource/js/all.js"></script>

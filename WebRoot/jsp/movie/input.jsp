@@ -89,10 +89,45 @@
 												</div>
 												<div class="col-lg-12 col-md-12 list_item_line type-div">
 													<label>演员：</label>
+													<select class="form-control actor-select">
+														<option data-alternative-spellings="1" value="">1</option>
+														<option data-alternative-spellings="2" value="">2</option>
+														<option data-alternative-spellings="3" value="">3</option>
+														<option data-alternative-spellings="4" value="">4</option>
+													</select>
+													<label>添加</label>
 													<ul>
-														<li>
-															<input class="form-control" type="checkbox" name="" value="${record.id}"/>
-															<label class="paddingLR10">${record.name }</label>
+														<li class="gray-li">
+															<label class="paddingLR10">成龙</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+														</li> 
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+														</li>
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+														</li>
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+													 	</li>
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+														</li>
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+														</li>
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
+														</li>
+														<li class="gray-li">
+															<label class="paddingLR10">周星驰</label>
+															<label class="paddingLR10 pull-right click-del-li">删除</label>
 														</li>
 													</ul>
 												</div>
@@ -128,8 +163,13 @@
 			$(function(){
 				
 				//注册下拉框为autocomplete
-// 				$('.date-select').selectToAutocomplete();
-
+				$('.actor-select').selectToAutocomplete();
+				
+// 				删除一行LI
+				$('.click-del-li').click(function(){
+					$(this).parents('li').remove();
+					util.success('删除成功!'); 
+				});
 				
 				
 			});
