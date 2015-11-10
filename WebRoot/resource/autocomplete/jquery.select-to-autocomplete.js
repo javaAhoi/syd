@@ -4375,11 +4375,11 @@ function(global) {
         t
     }
     function makeError(e, t, n, i) {
-        var r = new Error(t + "\nhttp://requirejs.org/docs/errors.html#" + e);
-        return r.requireType = e,
-        r.requireModules = i,
-        n && (r.originalError = n),
-        r
+//        var r = new Error(t + "\nhttp://requirejs.org/docs/errors.html#" + e);
+//        return r.requireType = e, 
+//        r.requireModules = i,
+//        n && (r.originalError = n),
+//        r
     }
     function newContext(e) {
         function t(e) {
@@ -4464,13 +4464,13 @@ function(global) {
             r = getOwn(T, i); ! hasProp(k, i) || r && !r.defineEmitComplete ? (r = a(e), r.error && "error" === t ? n(r.error) : r.on(t, n)) : "defined" === t && n(k[i])
         }
         function c(e, t) {
-            var n = e.requireModules,
-            i = !1;
-            t ? t(e) : (each(n,
-            function(t) {
-                var n = getOwn(T, t);
-                n && (n.error = e, n.events.error && (i = !0, n.emit("error", e)))
-            }), i || req.onError(e))
+//            var n = e.requireModules,
+//            i = !1;
+//            t ? t(e) : (each(n,
+//            function(t) {
+//                var n = getOwn(T, t);
+//                n && (n.error = e, n.events.error && (i = !0, n.emit("error", e)))
+//            }), i || req.onError(e))
         }
         function u() {
             globalDefQueue.length && (apsp.apply(_, [_.length, 0].concat(globalDefQueue)), globalDefQueue = [])
