@@ -88,48 +88,47 @@
 													</ul>
 												</div>
 												<div class="col-lg-12 col-md-12 list_item_line type-div">
-													<label>演员：</label>
+													<label style="margin-right:10px; width:60px;">演员：</label>
 													<div>
-														<select style="width:140px;" class="form-control actor-select">
-															<option data-alternative-spellings="abcsdf" value="">1</option>
-															<option data-alternative-spellings="asdwd" value="">2</option>
-															<option data-alternative-spellings="fdfg" value="">3</option>
-															<option data-alternative-spellings="dger" value="">4</option>
-														</select>
-														<label class="btn btn-success"><b>+</b></label> 
+														<input style="width:200px;" class="form-control actor-input" type="text" >
+														<label class="btn btn-success add-actor"><b>+</b></label> 
 													</div> 
-													<ul>  
-														<li class="gray-li">
+													<ul class="actor-li-list">  
+														<li class="gray-li border-radius-5">
 							 								<label class="paddingLR10">成龙</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li> 
-														<li class="gray-li">
+														<li class="gray-li border-radius-5">
 															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li>
-														<li class="gray-li">
+														<li class="gray-li border-radius-5">
 															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li>
-														<li class="gray-li">
+														<li class="gray-li border-radius-5">
 															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
-													 	</li>
-														<li class="gray-li">
-															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li>
-														<li class="gray-li">
+														<li class="gray-li border-radius-5">
 															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li>
-														<li class="gray-li">
+														<li class="gray-li border-radius-5">
 															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li>
-														<li class="gray-li">
+														<li class="gray-li border-radius-5">
 															<label class="paddingLR10">周星驰</label>
-															<label class="paddingLR10 pull-right click-del-li">删除</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+														</li>
+														<li class="gray-li border-radius-5">
+															<label class="paddingLR10">周星驰</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+														</li>
+														<li class="gray-li border-radius-5">
+															<label class="paddingLR10">周星驰</label>
+															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 														</li>
 													</ul>
 												</div>
@@ -164,17 +163,30 @@
 			
 			$(function(){
 				
-				//注册下拉框为autocomplete
-				$('.actor-select').selectToAutocomplete();
+// 				//注册下拉框为autocomplete
+// 				$('.actor-select').selectToAutocomplete();
 				
-				//删除一个演员LI 
-				$('.click-del-li').click(function(){
-					$(this).parents('li').remove();
-					util.success('删除成功!'); 
+				// 添加一个演员
+				$('.add-actor').click(function(){
+					
+					var actor = $('.actor-input').val();
+					
+					if(actor == ''){
+						util.error('请输入演员！');
+						return false;
+					}
+					
+					var LI = '';
+					LI += '<li class="gray-li border-radius-5">';
+					LI += '<label class="paddingLR10">'+actor+'</label>';
+					LI += '<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>';
+					LI += '</li>';
+					
+					$('.actor-li-list').append(LI);
 				});
 				
-				
 			});
+			
 		</script>
 	</body>
 

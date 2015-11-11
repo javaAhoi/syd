@@ -437,3 +437,5 @@ table tbody tr td.cols_title{  text-align: left; background: white;}
 .info .approval-span{display: inline-block;padding: 0px;font-size: 14px;line-height: 1.42857143;}
 
 .gray-li{background: rgb(223, 223, 223);margin: 5;}
+.border-radius-5{border-radius:5px;}
+.pointer{cursor: pointer;}

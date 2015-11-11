@@ -68,4 +68,10 @@ $(function(){
 });
 
 
+//删除一个LI 
+function DeleteLI(obj){
+	$(obj).parents('li').remove();
+	util.success('删除成功!'); 
+}
+
 
