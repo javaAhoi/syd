@@ -1,8 +1,9 @@
 package com.syd.controller;
 
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
-import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.syd.entity.Movie;
 import com.syd.entity.MovieActor;
@@ -21,7 +22,7 @@ import com.syd.shiro.ShiroUtils;
  * @描述: 电影库
  * @时间: 2015年10月29日下午10:12:22
  */
-public class MovieController extends Controller {
+public class MovieController extends BaseController {
 	
 	private User userInfo = ShiroUtils.getUser();
 	
@@ -40,6 +41,9 @@ public class MovieController extends Controller {
 	}
 	
 	
+	/**
+	 * 跳转到新增电影
+	 */
 	public void input(){
 		keepPara();
 
@@ -56,6 +60,28 @@ public class MovieController extends Controller {
 		setAttr("years", years);
 		setAttr("actors", actors);
 		setAttr("lans", lans);
+	}
+	
+	
+	/**
+	 * 保存
+	 */
+	public void save(){
+		
+		
+		Map<String, String[]> paraMap = getParaMap();
+		
+		for(Map.Entry<String, String[]> entry : paraMap.entrySet()){
+			String key = entry.getKey();
+			String[] value = entry.getValue();
+			
+			
+			
+			
+		}
+		
+		
+		
 	}
 	
 }

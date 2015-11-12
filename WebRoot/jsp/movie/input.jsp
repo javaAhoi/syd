@@ -71,7 +71,7 @@
 										<div class="tile-body">
 											<div class="field_box">
 												<div class="row">
-													<div class="col-lg-12 col-md-12 list_item_line ">
+													<div class="col-lg-12 col-md-12 list_item_line type-div">
 														<ul>
 															<c:forEach items="${types}" var="record">
 																<li>
@@ -92,7 +92,7 @@
 										<div class="tile-body">
 											<div class="field_box">
 												<div class="row">
-													<div class="col-lg-12 col-md-12 list_item_line ">
+													<div class="col-lg-12 col-md-12 list_item_line year-div">
 														<ul>
 															<c:forEach items="${years}" var="record">
 																<li>
@@ -113,7 +113,7 @@
 										<div class="tile-body">
 											<div class="field_box">
 												<div class="row">
-													<div class="col-lg-12 col-md-12 list_item_line ">
+													<div class="col-lg-12 col-md-12 list_item_line area-div">
 														<ul>
 															<c:forEach items="${areas}" var="record">
 																<li>
@@ -134,7 +134,7 @@
 										<div class="tile-body">
 											<div class="field_box">
 												<div class="row">
-													<div class="col-lg-12 col-md-12 list_item_line ">
+													<div class="col-lg-12 col-md-12 list_item_line lan-div">
 														<ul>
 															<c:forEach items="${lans}" var="record">
 																<li>
@@ -155,46 +155,46 @@
 										<div class="tile-body">
 											<div class="field_box">
 												<div class="row">
-													<div class="col-lg-12 col-md-12 list_item_line ">
+													<div class="col-lg-12 col-md-12 list_item_line actor-div">
 														<div>
 															<input style="width:200px;" class="form-control actor-input" type="text" >
 															<label class="btn btn-success add-actor"><b>+</b></label> 
 														</div> 
 														<ul class="actor-li-list">  
 															<li class="gray-li border-radius-5">
-								 								<label class="paddingLR10">成龙</label>
+								 								<label class="paddingLR10 actor-name">成龙</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li> 
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 															<li class="gray-li border-radius-5">
-																<label class="paddingLR10">周星驰</label>
+																<label class="paddingLR10 actor-name">周星驰</label>
 																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
 															</li>
 														</ul>
@@ -261,7 +261,7 @@
 					
 					var LI = '';
 					LI += '<li class="gray-li border-radius-5">';
-					LI += '<label class="paddingLR10">'+actor+'</label>';
+					LI += '<label class="paddingLR10 actor-name">'+actor+'</label>';
 					LI += '<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>';
 					LI += '</li>';
 					
@@ -281,11 +281,29 @@
 				param.sytime = $('.movie_sytime').val();
 				
 				// 类型
+				var arr_tid = {};
+				$('.type-div ul li input[type=checkbox]:checked').each(function(){
+					var typeid = $(this).val();
+					arr_tid.push(typeid);
+				});
+				param.typeids = arr_tid;
+				
+				//年代
 				
 				
 				
+				var $form = $(obj).parents('form');
 				
-				$(obj).parents('form').submit();
+				$.ajax({
+					type : 'get',
+					url  : $form.attr('action'),
+					data : param,
+					success : function(result){
+						
+					}
+				});
+				
+				
 			}
 			
 		</script>
