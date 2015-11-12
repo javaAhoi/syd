@@ -7,6 +7,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.syd.entity.Movie;
 import com.syd.entity.MovieActor;
 import com.syd.entity.MovieArea;
+import com.syd.entity.MovieLan;
 import com.syd.entity.MovieType;
 import com.syd.entity.MovieYear;
 import com.syd.entity.User;
@@ -49,10 +50,12 @@ public class MovieController extends Controller {
 		List<Record> areas = MovieArea.dao.getList();
 		List<Record> years = MovieYear.dao.getList();
 		List<Record> actors = MovieActor.dao.getList();
+		List<Record> lans = MovieLan.dao.getList();
 		setAttr("types", types);
 		setAttr("areas", areas);
 		setAttr("years", years);
 		setAttr("actors", actors);
+		setAttr("lans", lans);
 	}
 	
 }

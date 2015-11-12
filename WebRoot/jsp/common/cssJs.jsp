@@ -22,6 +22,8 @@
 <script type="text/javascript" src="${ctx}/resource/js/all.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.validate.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/icheck.js"></script>
+<!-- 时间 js-->
+<script type="text/javascript" src="${ctx}/resource/js/WdatePicker/WdatePicker.js"></script>
 <!-- bootstrap -->
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap-table-all.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/bootstrap-table.js"></script>
@@ -31,3 +33,7 @@
 <script type="text/javascript" src="${ctx}/resource/js/jquery.nicescroll.min.js"></script>
 <!-- 自定义js -->
 <script type="text/javascript" src="${ctx}/resource/js/js.js"></script>
+
+<!-- 文本编辑器 js-->
+<script type="text/javascript" src="${ctx}/resource/js/TextEditor/ueditor.config.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/TextEditor/ueditor.all.min.js"></script> 

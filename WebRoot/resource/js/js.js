@@ -65,6 +65,14 @@ $(function(){
 			radioClass: 'iradio_flat-green',
 		});
 	}
+	
+//	//调用时间插件
+//	$(".date-picker").focus(function() {
+//		WdatePicker({
+//			dateFmt: 'yyyy-MM-dd'
+//		});
+//	});
+	
 });
 
 

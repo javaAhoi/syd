@@ -32,113 +32,197 @@
 						<!--/middle_top_nav-->
 						<!--/middle_main-->
 						<div class="middle_main from_style">
-						 <!-- list_table -->
-						 <form autocomplete="off" action="${ctx}/movie/save" method="post" class="form-horizontal">
-						 	<input type="hidden" name="opera" value="${opera}">
-						 	<input type="hidden" name="id" value="${id}">
-							<div class="col-lg-12 col-md-12">
-								<div class="form_box box_bg marginT20">
-									<div class="tile-header">填写基本信息</div>
-									<div class="tile-body">
-										<div class="field_box input_width">
-											<div class="row">
-												<div class="col-lg-4 col-md-4 marginB10">
-													<label>电影名：</label>
-													<input style="width:200px;" name="name" class="form-control required" type="text" value="${record.name}" >
-												</div>
-												<div class="col-lg-4 col-md-4 marginB10">
-													<label>分钟：</label>
-													<input style="width:70px;text-align:right;" name="minute" class="form-control required" type="text" value="${record.minute}" >分钟
-												</div>
-												<div class="col-lg-4 col-md-4 marginB10">
-													<label>上映时间：</label>
-													<input style="width:70px;text-align:right;" name="sy_time" class="form-control required" type="text" value="${record.minute}" >
-												</div>
-												<div class="col-lg-12 col-md-12 list_item_line type-div">
-													<label>类型：</label>
-													<ul>
-														<c:forEach items="${types}" var="record">
-															<li>
-																<input class="form-control" type="checkbox" name="" value="${record.id}"/>
-																<label class="paddingLR10">${record.name }</label>
-															</li>
-														</c:forEach>
-													</ul>
-												</div>
-												<div class="col-lg-12 col-md-12 list_item_line type-div">
-													<label>年代：</label>
-													<ul>
-														<c:forEach items="${years}" var="record">
-															<li>
-																<input class="form-control" type="checkbox" name="" value="${record.id}"/>
-																<label class="paddingLR10">${record.name }</label>
-															</li>
-														</c:forEach>
-													</ul>
-												</div>
-												<div class="col-lg-12 col-md-12 list_item_line type-div">
-													<label>地区：</label>
-													<ul>
-														<c:forEach items="${areas}" var="record">
-															<li>
-																<input class="form-control" type="checkbox" name="" value="${record.id}"/>
-																<label class="paddingLR10">${record.name }</label>
-															</li>
-														</c:forEach>
-													</ul>
-												</div>
-												<div class="col-lg-12 col-md-12 list_item_line type-div">
-													<label style="margin-right:10px; width:60px;">演员：</label>
-													<div>
-														<input style="width:200px;" class="form-control actor-input" type="text" >
-														<label class="btn btn-success add-actor"><b>+</b></label> 
-													</div> 
-													<ul class="actor-li-list">  
-														<li class="gray-li border-radius-5">
-							 								<label class="paddingLR10">成龙</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li> 
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-														<li class="gray-li border-radius-5">
-															<label class="paddingLR10">周星驰</label>
-															<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-														</li>
-													</ul>
-												</div>
-											</div>  
-									  	</div>
+							 <!-- list_table -->
+							 <form autocomplete="off" action="${ctx}/movie/save" method="post" class="form-horizontal">
+							 	<input type="hidden" name="opera" value="${opera}">
+							 	<input type="hidden" name="id" value="${id}">
+								<div class="col-lg-12 col-md-12">
+								
+									<!-- 基本信息 -->
+									<div class="form_box box_bg marginT20">
+										<div class="tile-header">填写基本信息</div>
+										<div class="tile-body">
+											<div class="field_box input_width">
+												<div class="row">
+													
+													<div class="col-lg-4 col-md-4 marginB10">
+														<label>电影名：</label>
+														<input style="width:200px;" class="form-control movie-name required" type="text" value="${record.name}" >
+													</div>
+													
+													<div class="col-lg-3 col-md-3 marginB10">
+														<label>分钟：</label>
+														<input style="width:70px;text-align:right;" class="form-control movie-minute required" type="text" value="${record.minute}" >分钟
+													</div>
+													
+													<div class="col-lg-4 col-md-4 marginB10">
+														<label>上映时间：</label>
+														<input class="form-control movie-sytime icon_time_bg" onclick="WdatePicker()" type="text" />
+													</div>
+												
+												</div>  
+										  	</div>
+										</div>
 									</div>
-								</div>
 									
-								<div class="col-lg-12 col-md-12 text-left marginB26"><a onclick="submitForm(this);" class="submit btn-success" href="javascript:;">提交</a></div>
-							  </div>
+									<!-- 类型 -->
+									<div class="form_box box_bg">
+										<div class="tile-header">类型</div>
+										<div class="tile-body">
+											<div class="field_box">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 list_item_line ">
+														<ul>
+															<c:forEach items="${types}" var="record">
+																<li>
+																	<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	<label class="paddingLR10">${record.name }</label>
+																</li>
+															</c:forEach>
+														</ul>
+													</div>
+											   </div>
+										  </div>
+										</div>
+									</div>
+	
+									<!-- 年代 -->
+									<div class="form_box box_bg">
+									<div class="tile-header">年代</div>
+										<div class="tile-body">
+											<div class="field_box">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 list_item_line ">
+														<ul>
+															<c:forEach items="${years}" var="record">
+																<li>
+																	<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	<label class="paddingLR10">${record.name }</label>
+																</li>
+															</c:forEach>
+														</ul>
+													</div>
+											   </div>
+										  </div>
+										</div>
+									</div>
+	
+									<!-- 地区 -->
+									<div class="form_box box_bg">
+										<div class="tile-header">地区</div>
+										<div class="tile-body">
+											<div class="field_box">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 list_item_line ">
+														<ul>
+															<c:forEach items="${areas}" var="record">
+																<li>
+																	<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	<label class="paddingLR10">${record.name }</label>
+																</li>
+															</c:forEach>
+														</ul>
+													</div>
+											   </div>
+										  </div>
+										</div>
+									</div>
+	
+									<!-- 语种 -->
+									<div class="form_box box_bg">
+										<div class="tile-header">语种</div>
+										<div class="tile-body">
+											<div class="field_box">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 list_item_line ">
+														<ul>
+															<c:forEach items="${lans}" var="record">
+																<li>
+																	<input class="form-control" type="radio" name="language" value="${record.id}"/>
+																	<label class="paddingLR10">${record.name }</label>
+																</li>
+															</c:forEach>
+														</ul>
+													</div>
+											   </div>
+										  </div>
+										</div>
+									</div>
+	
+									<!-- 演员 -->
+									<div class="form_box box_bg">
+										<div class="tile-header">演员</div>
+										<div class="tile-body">
+											<div class="field_box">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 list_item_line ">
+														<div>
+															<input style="width:200px;" class="form-control actor-input" type="text" >
+															<label class="btn btn-success add-actor"><b>+</b></label> 
+														</div> 
+														<ul class="actor-li-list">  
+															<li class="gray-li border-radius-5">
+								 								<label class="paddingLR10">成龙</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li> 
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+															<li class="gray-li border-radius-5">
+																<label class="paddingLR10">周星驰</label>
+																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+															</li>
+														</ul>
+													</div>
+											   </div>
+										  </div>
+										</div>
+									</div>
+										
+									<!-- 简介 -->
+									<div class="form_box box_bg">
+										<div class="tile-header">简介</div>
+										<div class="tile-body">
+											<div class="field_box">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 list_item_line ">
+														<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+													</div>
+											   </div>
+										  </div>
+										</div>
+									</div>
+										
+									<div class="col-lg-12 col-md-12 text-left marginB26">
+										<a onclick="submitForm(this);" class="submit btn-success" href="javascript:;">提交</a>
+									</div>
+								 
+								</div>
 							</form>
 							<!--/list_table-->
 						</div>
@@ -150,6 +234,10 @@
 		
 		
 		<script type="text/javascript">
+			
+			//百度UEditor编辑器
+			var ue = UE.getEditor('editor');
+		
 			//表单提提交
 			function submitForm(obj){ 
 				if($('input[name=name]').val() == ''){
@@ -162,15 +250,10 @@
 			
 			
 			$(function(){
-				
-// 				//注册下拉框为autocomplete
-// 				$('.actor-select').selectToAutocomplete();
-				
+
 				// 添加一个演员
 				$('.add-actor').click(function(){
-					
 					var actor = $('.actor-input').val();
-					
 					if(actor == ''){
 						util.error('请输入演员！');
 						return false;
@@ -184,8 +267,26 @@
 					
 					$('.actor-li-list').append(LI);
 				});
-				
 			});
+			
+			
+			// 表单提交
+			function submitForm(obj){
+				
+				var param = new Object();
+				
+				// 基本信息
+				param.name = $('.movie_name').val();
+				param.minute = $('.movie_minute').val();
+				param.sytime = $('.movie_sytime').val();
+				
+				// 类型
+				
+				
+				
+				
+				$(obj).parents('form').submit();
+			}
 			
 		</script>
 	</body>
