@@ -27,8 +27,14 @@ public class MovieType extends Model<MovieType> {
 	 * @param movie_id
 	 * @return
 	 */
-	public List<Record> getByMovieId(Object movie_id){
-		return Db.find("select * from syd_movie_type_2_m t2 left join syd_movie_type t on t2.movie_id = t.id");
+	public List<Record> getByMovieId(Object movie_id, Integer limit){
+		
+		String sql = "select * from syd_movie_type_2_m t2 left join syd_movie_type t on t2.type_id = t.id where t2.movie_id = ?";
+		
+		if(limit != null)
+			sql += " limit " + limit;
+		
+		return Db.find(sql, movie_id);
 	}
 	
 	

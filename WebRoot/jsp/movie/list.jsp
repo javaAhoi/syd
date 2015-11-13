@@ -48,10 +48,11 @@
 											<tr>
 										        <th data-align="center" data-width="100">序号</th>
 										        <th data-align="center" data-width="12%">电影名</th>
+										        <th data-align="center" data-width="12%">类型</th>
+										        <th data-align="center" data-width="100">年代</th> 
 										        <th data-align="center" data-width="12%">主演</th>
 										        <th data-align="center" data-width="100">语种</th> 
 										        <th data-align="center" data-width="100">分钟</th> 
-										        <th data-align="center" data-width="100">年代</th> 
 										        <th data-align="center" data-width="12%">操作</th>
 											</tr>
 										</thead>
@@ -64,13 +65,18 @@
 														<a title="点击修改" style="font-size: 14px;" href="${ctx}/movie/input?id=${record.id}">${record.name }</a>
 											 		</td>
 													<td>
+														<c:forEach items="${record.types}" var="type">
+															${type.name}&nbsp;&nbsp;
+														</c:forEach>
+													</td>
+													<td>${record.year }</td>
+													<td>
 														<c:forEach items="${record.actors}" var="actor">
 															${actor.name}&nbsp;&nbsp;
 														</c:forEach>
 													</td>
-													<td>${record.language }</td>
+													<td>${record.lan }</td>
 													<td>${record.minute }</td>
-													<td>${record.year }</td>
 													<td>
 														删除
 														修改

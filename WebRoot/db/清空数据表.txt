@@ -1,8 +1,8 @@
-truncate syd_movie;
+delete from syd_movie;
 
-truncate syd_movie_type_2_m;
+delete from syd_movie_type_2_m;
 
-truncate syd_movie_actor;
+delete from syd_movie_actor;
 
-truncate syd_movie_act_2_m;
-truncate syd_movie_area_2_m;
+delete from syd_movie_act_2_m;
+delete from syd_movie_area_2_m;

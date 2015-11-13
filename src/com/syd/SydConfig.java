@@ -21,7 +21,9 @@ import com.syd.controller.MovieYearController;
 import com.syd.controller.UserController;
 import com.syd.entity.Movie;
 import com.syd.entity.MovieActor;
+import com.syd.entity.MovieActor2;
 import com.syd.entity.MovieArea;
+import com.syd.entity.MovieArea2;
 import com.syd.entity.MovieLan;
 import com.syd.entity.MovieType;
 import com.syd.entity.MovieType2;
@@ -85,9 +87,11 @@ public class SydConfig extends JFinalConfig {
 		
 		arp.addMapping("syd_movie", Movie.class);
 		arp.addMapping("syd_movie_actor", MovieActor.class);
+		arp.addMapping("syd_movie_act_2_m", MovieActor2.class);
 		arp.addMapping("syd_movie_type", MovieType.class);
 		arp.addMapping("syd_movie_type_2_m", MovieType2.class);
 		arp.addMapping("syd_movie_area", MovieArea.class);
+		arp.addMapping("syd_movie_area_2_m", MovieArea2.class);
 		arp.addMapping("syd_movie_language", MovieLan.class);
 		arp.addMapping("syd_movie_year", MovieYear.class);
 		arp.addMapping("syd_user", User.class);

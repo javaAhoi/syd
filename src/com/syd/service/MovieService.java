@@ -28,19 +28,19 @@ public class MovieService {
 			Integer movie_id = r.getInt("id");
 			
 			//获取电影演员list
-			List<Record> actors = MovieActor.dao.getByMovieId(movie_id);
-			for(Record r2: actors){
-				String pinyin = getPinyinByName(r2.getStr("name"));
-				r2.set("pinyin", pinyin);
-			}
+			List<Record> actors = MovieActor.dao.getByMovieId(movie_id, 2);
+//			for(Record r2: actors){
+//				String pinyin = getPinyinByName(r2.getStr("name"));
+//				r2.set("pinyin", pinyin);
+//			}
 			r.set("actors", actors);
 			
 			//获取电影类型list
-			List<Record> types = MovieType.dao.getByMovieId(movie_id);
-			for(Record r2: types){
-				String pinyin = getPinyinByName(r2.getStr("name"));
-				r2.set("pinyin", pinyin);
-			}
+			List<Record> types = MovieType.dao.getByMovieId(movie_id, 2);
+//			for(Record r2: types){
+//				String pinyin = getPinyinByName(r2.getStr("name"));
+//				r2.set("pinyin", pinyin);
+//			}
 			r.set("types", types);
 		}
 	}

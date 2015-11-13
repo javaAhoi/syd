@@ -7,6 +7,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.syd.entity.Constant.QueryType;
 import com.syd.entity.MovieActor;
 import com.syd.entity.User;
 import com.syd.shiro.ShiroUtils;
@@ -31,7 +32,7 @@ public class MovieActController extends Controller {
 		String search_movieAct_name = getPara("search_movieAct_name");
 		setAttr("search_movieAct_name", search_movieAct_name);
 		
-		List<Record> list = MovieActor.dao.getByNameLike(search_movieAct_name);
+		List<Record> list = MovieActor.dao.getByName(search_movieAct_name, QueryType.like);
 		setAttr("list", list);
 		
 	}

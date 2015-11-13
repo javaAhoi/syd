@@ -31,7 +31,6 @@ public class BaseController extends Controller {
 		
 		return params;
 	}
-	
 }
 
 

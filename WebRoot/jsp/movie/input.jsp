@@ -96,7 +96,7 @@
 														<ul>
 															<c:forEach items="${years}" var="record">
 																<li>
-																	<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	<input class="form-control" type="radio" name="year" value="${record.id}"/>
 																	<label class="paddingLR10">${record.name }</label>
 																</li>
 															</c:forEach>
@@ -288,18 +288,15 @@
 				param.typeids = typeid;
 				
 				// 年代
-				var yearid = '';
-				$('.year-div ul li input[type=checkbox]:checked').each(function(){
-					yearid += $(this).val() + ",";
-				});
-				param.yearids = yearid;
+				var yearid = $('.year-div ul li input[type=radio]:checked').val();
+				param.yearid = yearid;
 				
 				// 地区
 				var areaid = '';
-				$('.year-div ul li input[type=checkbox]:checked').each(function(){
-					yearid += $(this).val() + ",";
+				$('.area-div ul li input[type=checkbox]:checked').each(function(){
+					areaid += $(this).val() + ",";
 				});
-				param.yearids = yearid;
+				param.areaids = areaid;
 				
 				// 语种
 				var lanid = $('.lan-div ul li input[type=radio]:checked').val();
@@ -308,9 +305,13 @@
 				// 演员
 				var actors = '';
 				$('.actor-li-list li label.actor-name').each(function(){
-					actors += $(this).text();
+					actors += $(this).text() + ",";
 				});
 				param.actors = actors;
+				
+				// 简介
+				var info = ue.getContent();
+				param.info = info;
 				
 				
 				
