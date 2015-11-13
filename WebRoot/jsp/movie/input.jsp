@@ -276,19 +276,42 @@
 				var param = new Object();
 				
 				// 基本信息
-				param.name = $('.movie_name').val();
-				param.minute = $('.movie_minute').val();
-				param.sytime = $('.movie_sytime').val();
+				param.name = $('.movie-name').val();
+				param.minute = $('.movie-minute').val();
+				param.sytime = $('.movie-sytime').val();
 				
 				// 类型
-				var arr_tid = {};
+				var typeid = '';
 				$('.type-div ul li input[type=checkbox]:checked').each(function(){
-					var typeid = $(this).val();
-					arr_tid.push(typeid);
+					typeid += $(this).val() + ",";
 				});
-				param.typeids = arr_tid;
+				param.typeids = typeid;
 				
-				//年代
+				// 年代
+				var yearid = '';
+				$('.year-div ul li input[type=checkbox]:checked').each(function(){
+					yearid += $(this).val() + ",";
+				});
+				param.yearids = yearid;
+				
+				// 地区
+				var areaid = '';
+				$('.year-div ul li input[type=checkbox]:checked').each(function(){
+					yearid += $(this).val() + ",";
+				});
+				param.yearids = yearid;
+				
+				// 语种
+				var lanid = $('.lan-div ul li input[type=radio]:checked').val();
+				param.languageid = lanid;
+				
+				// 演员
+				var actors = '';
+				$('.actor-li-list li label.actor-name').each(function(){
+					actors += $(this).text();
+				});
+				param.actors = actors;
+				
 				
 				
 				
@@ -299,7 +322,12 @@
 					url  : $form.attr('action'),
 					data : param,
 					success : function(result){
-						
+						if(result){
+							window.location.href = '${ctx}/movie/list';
+						}else{
+							util.error('系统错误！');
+							return false;
+						} 
 					}
 				});
 				

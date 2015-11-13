@@ -1,5 +1,9 @@
 package com.syd.controller;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.jfinal.core.Controller;
 
 /**
@@ -11,6 +15,22 @@ import com.jfinal.core.Controller;
  */
 public class BaseController extends Controller {
 	
+	
+	/**
+	 * 处理表单参数
+	 */
+	public Map<String, Object> getParamMapFromRequst(){
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		// 遍历参数，将所有参数放入map
+		Enumeration<String> paraNames = getRequest().getParameterNames();
+		while (paraNames.hasMoreElements()) {
+			String element = paraNames.nextElement();
+			params.put(element, getPara(element));
+		}
+		
+		return params;
+	}
 	
 }
 

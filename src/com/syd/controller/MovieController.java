@@ -1,15 +1,17 @@
 package com.syd.controller;
 
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.syd.entity.Movie;
 import com.syd.entity.MovieActor;
 import com.syd.entity.MovieArea;
 import com.syd.entity.MovieLan;
 import com.syd.entity.MovieType;
+import com.syd.entity.MovieType2;
 import com.syd.entity.MovieYear;
 import com.syd.entity.User;
 import com.syd.service.MovieService;
@@ -66,22 +68,66 @@ public class MovieController extends BaseController {
 	/**
 	 * 保存
 	 */
+	@Before(Tx.class)
 	public void save(){
 		
+		boolean flag = false;
 		
-		Map<String, String[]> paraMap = getParaMap();
-		
-		for(Map.Entry<String, String[]> entry : paraMap.entrySet()){
-			String key = entry.getKey();
-			String[] value = entry.getValue();
+		try {
+			String opera = getPara("opera");
+			Integer id = getParaToInt("id");
+			
+			Movie record = new Movie();
+			
+			// 更新
+			if("update".equals(opera)){
+				record.set("id", id);
+				record.update();
+				
+			}
+			
+			// 新增
+			else{
+				record.save();
+				id = record.getInt("id");
+			}
+			
+			
+			
+			// 获取参数
+			Map<String, Object> params = getParamMapFromRequst();
+			
+			Object name = params.get("name");		// 名字
+			Object minute = params.get("minute");	// 分钟
+			Object sytime = params.get("sytime");	// 上映时间
+			record.set("name", name);
+			record.set("minute", minute);
+			record.set("sy_time", sytime);
+			
+			// 遍历类型id， 保存到syd_movie_2_type表
+			Object typeids = params.get("typeids");	// 类型id
+			if(typeids != null){
+				String[] ids = typeids.toString().split(",");
+				for(String s : ids){
+					MovieType2 mt2 = new MovieType2();
+					mt2.set("movie_id", id);
+					mt2.set("type_id", Integer.parseInt(s));
+					mt2.save();
+				}
+			}
 			
 			
 			
 			
+			
+			record.update();
+			flag = true;
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
 		}
 		
-		
-		
+		renderJson(flag);
 	}
 	
 }
