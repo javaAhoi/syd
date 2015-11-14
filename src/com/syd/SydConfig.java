@@ -19,6 +19,7 @@ import com.syd.controller.MovieLanController;
 import com.syd.controller.MovieTypeController;
 import com.syd.controller.MovieYearController;
 import com.syd.controller.UserController;
+import com.syd.entity.Attach;
 import com.syd.entity.Movie;
 import com.syd.entity.MovieActor;
 import com.syd.entity.MovieActor2;
@@ -95,6 +96,7 @@ public class SydConfig extends JFinalConfig {
 		arp.addMapping("syd_movie_language", MovieLan.class);
 		arp.addMapping("syd_movie_year", MovieYear.class);
 		arp.addMapping("syd_user", User.class);
+		arp.addMapping("syd_movie_attach", Attach.class);
 		
 		
 		

@@ -8,6 +8,10 @@
 
 		<%@ include file="/jsp/common/cssJs.jsp"%>
 		
+		<!-- 文件上传 -->
+		<link rel="stylesheet" href="${ctx}/resource/fineuploader/fineuploader-5.0.2.min.css" /> 
+		<script type="text/javascript" src="${ctx}/resource/fineuploader/fineuploader-5.0.2.min.js"></script>
+		
 		<title>搜影殿-电影详情</title>
 		
 	</head>
@@ -47,17 +51,17 @@
 													
 													<div class="col-lg-4 col-md-4 marginB10">
 														<label>电影名：</label>
-														<input style="width:200px;" class="form-control movie-name required" type="text" value="${record.name}" >
+														<input style="width:200px;" class="form-control movie-name required" type="text" value="${MovieRecord.name}" >
 													</div>
 													
 													<div class="col-lg-3 col-md-3 marginB10">
 														<label>分钟：</label>
-														<input style="width:70px;text-align:right;" class="form-control movie-minute required" type="text" value="${record.minute}" >分钟
+														<input style="width:70px;text-align:right;" class="form-control movie-minute required" type="text" value="${MovieRecord.minute}" >分钟
 													</div>
 													
 													<div class="col-lg-4 col-md-4 marginB10">
 														<label>上映时间：</label>
-														<input class="form-control movie-sytime icon_time_bg" onclick="WdatePicker()" type="text" />
+														<input class="form-control movie-sytime icon_time_bg" onclick="WdatePicker()" type="text" value="${MovieRecord.sy_time }" />
 													</div>
 												
 												</div>  
@@ -75,7 +79,14 @@
 														<ul>
 															<c:forEach items="${types}" var="record">
 																<li>
-																	<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	<!-- 匹配对象的 默认值 -->
+																	<c:set var="typeid" value="[${record.id }]"></c:set>
+																	<c:if test="${fn:contains(typeStr, typeid) }">
+																		<input class="form-control" checked="checked" type="checkbox" name="" value="${record.id}"/>
+																	</c:if>
+																	<c:if test="${not fn:contains(typeStr, typeid) }">
+																		<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	</c:if>
 																	<label class="paddingLR10">${record.name }</label>
 																</li>
 															</c:forEach>
@@ -96,10 +107,10 @@
 														<ul>
 															<c:forEach items="${years}" var="record">
 																<li>
-																	<input class="form-control" type="radio" name="year" value="${record.id}"/>
+																	<input class="form-control" <c:if test="${record.id eq MovieRecord.year_id }">checked="checked"</c:if> type="radio" name="year" value="${record.id}"/>
 																	<label class="paddingLR10">${record.name }</label>
-																</li>
-															</c:forEach>
+																</li> 
+															</c:forEach>   
 														</ul>
 													</div>
 											   </div>
@@ -117,7 +128,14 @@
 														<ul>
 															<c:forEach items="${areas}" var="record">
 																<li>
-																	<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	<!-- 匹配对象的  默认值 -->
+																	<c:set var="areaid" value="[${record.id }]"></c:set>
+																	<c:if test="${fn:contains(areaStr, areaid) }">
+																		<input class="form-control" checked="checked" type="checkbox" name="" value="${record.id}"/>
+																	</c:if>
+																	<c:if test="${not fn:contains(areaStr, areaid) }">
+																		<input class="form-control" type="checkbox" name="" value="${record.id}"/>
+																	</c:if>
 																	<label class="paddingLR10">${record.name }</label>
 																</li>
 															</c:forEach>
@@ -138,7 +156,7 @@
 														<ul>
 															<c:forEach items="${lans}" var="record">
 																<li>
-																	<input class="form-control" type="radio" name="language" value="${record.id}"/>
+																	<input class="form-control" <c:if test="${record.id eq MovieRecord.language_id }">checked="checked"</c:if> type="radio" name="language" value="${record.id}"/>
 																	<label class="paddingLR10">${record.name }</label>
 																</li>
 															</c:forEach>
@@ -161,42 +179,13 @@
 															<label class="btn btn-success add-actor"><b>+</b></label> 
 														</div> 
 														<ul class="actor-li-list">  
-															<li class="gray-li border-radius-5">
-								 								<label class="paddingLR10 actor-name">成龙</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li> 
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
-															<li class="gray-li border-radius-5">
-																<label class="paddingLR10 actor-name">周星驰</label>
-																<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
-															</li>
+															<c:forEach items="${actorList}" var="record">
+																<li class="gray-li border-radius-5">
+									 								<label class="paddingLR10 actor-name">${record.name }</label>
+																	<label onclick="DeleteLI($(this));" class="paddingLR10 pull-right pointer">删除</label>
+																</li> 
+															</c:forEach>
+														
 														</ul>
 													</div>
 											   </div>
@@ -211,12 +200,15 @@
 											<div class="field_box">
 												<div class="row">
 													<div class="col-lg-12 col-md-12 list_item_line ">
-														<script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+														<script id="editor" type="text/plain" style="width:100%;height:500px;">${MovieRecord.info}</script>
 													</div>
 											   </div>
 										  </div>
 										</div>
 									</div>
+
+									<!-- 附件相关 -->
+									<jsp:include page="/jsp/common/attachList.jsp"></jsp:include>
 										
 									<div class="col-lg-12 col-md-12 text-left marginB26">
 										<a onclick="submitForm(this);" class="submit btn-success" href="javascript:;">提交</a>
@@ -250,6 +242,9 @@
 			
 			
 			$(function(){
+				
+				// 初始化附件上传插件
+				initUploader();
 
 				// 添加一个演员
 				$('.add-actor').click(function(){
@@ -270,69 +265,80 @@
 			});
 			
 			
+			
 			// 表单提交
 			function submitForm(obj){
 				
-				var param = new Object();
+				var Input = '';
 				
 				// 基本信息
-				param.name = $('.movie-name').val();
-				param.minute = $('.movie-minute').val();
-				param.sytime = $('.movie-sytime').val();
+				Input += '<input type=hidden name="name" value="'+$('.movie-name').val()+'">';
+				Input += '<input type=hidden name="minute" value="'+$('.movie-minute').val()+'">';
+				Input += '<input type=hidden name="sytime" value="'+$('.movie-sytime').val()+'">';
 				
 				// 类型
 				var typeid = '';
 				$('.type-div ul li input[type=checkbox]:checked').each(function(){
 					typeid += $(this).val() + ",";
 				});
-				param.typeids = typeid;
+				Input += '<input type=hidden name="typeids" value="'+typeid+'">';
 				
 				// 年代
 				var yearid = $('.year-div ul li input[type=radio]:checked').val();
-				param.yearid = yearid;
+				if(yearid != undefined)
+					Input += '<input type=hidden name="yearid" value="'+yearid+'">';
 				
 				// 地区
 				var areaid = '';
 				$('.area-div ul li input[type=checkbox]:checked').each(function(){
 					areaid += $(this).val() + ",";
 				});
-				param.areaids = areaid;
+				Input += '<input type=hidden name="areaids" value="'+areaid+'">'; 
 				
 				// 语种
 				var lanid = $('.lan-div ul li input[type=radio]:checked').val();
-				param.languageid = lanid;
+				if(lanid != undefined)
+					Input += '<input type=hidden name="languageid" value="'+lanid+'">';
 				
 				// 演员
 				var actors = '';
 				$('.actor-li-list li label.actor-name').each(function(){
 					actors += $(this).text() + ",";
 				});
-				param.actors = actors;
+				Input += '<input type=hidden name="actors" value="'+actors+'">';
 				
 				// 简介
 				var info = ue.getContent();
-				param.info = info;
+				Input += '<input type=hidden name="info" value="'+info+'">';
 				
-				
-				
-				
+				// 表单提交
 				var $form = $(obj).parents('form');
 				
-				$.ajax({
-					type : 'get',
-					url  : $form.attr('action'),
-					data : param,
-					success : function(result){
-						if(result){
-							window.location.href = '${ctx}/movie/list';
-						}else{
-							util.error('系统错误！');
-							return false;
-						} 
-					}
+				uploadFile(function(){
+					
+					// 图片附件id
+					var fileids = '';
+					$('input[name="fileid"]').each(function(){
+						fileids += $(this).val() + ',';
+					});
+					Input += '<input type=hidden name="fileids" value="'+fileids+'">';
+					$form.append(Input);
+					$form.submit();
+					
+// 					$.ajax({
+// 						type : 'get',
+// 						url  : $form.attr('action'),
+// 						data : param,
+// 						success : function(result){
+// 							if(result){
+// 								window.location.href = '${ctx}/movie/list';
+// 							}else{
+// 								util.error('系统错误！');
+// 								return false;
+// 							} 
+// 						}
+// 					});
 				});
-				
-				
 			}
 			
 		</script>

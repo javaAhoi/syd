@@ -78,8 +78,8 @@
 													<td>${record.lan }</td>
 													<td>${record.minute }</td>
 													<td>
-														删除
-														修改
+														<a href="javascript:;" class="del-btn" data-id="${record.id}">删除</a>
+														<a href="${ctx}/movie/input?id=${record.id}">修改</a>
 													</td>
 												</tr>
 											</c:forEach>
@@ -95,7 +95,28 @@
 		</div>
 		
 		<script type="text/javascript">
-			
+		
+			//删除操作
+			$(function(){
+				$('.del-btn').click(function(){
+					if(window.confirm('确认删除吗？')){
+						var id = $(this).attr('data-id');
+						$.ajax({
+							type : 'post',
+							url : '${ctx}/movie/delete?id='+id,
+							success : function(result){
+								if(result){
+									util.success('删除成功！');
+									window.location.href = '${ctx}/movie/list';
+								}else{
+									util.error('删除失败！');
+								}
+							}
+						});
+					}
+				});
+			});
+		
 		</script>
 	</body>
 

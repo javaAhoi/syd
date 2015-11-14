@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
-import com.syd.entity.Constant.QueryType;
+import com.syd.utils.Constant.QueryType;
 
 /**
  * @author FHC

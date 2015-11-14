@@ -98,9 +98,6 @@ public class MovieAreaController extends Controller {
 		} finally {
 			renderJson(result);
 		}
-		
-		
-		
 	}
 }
 

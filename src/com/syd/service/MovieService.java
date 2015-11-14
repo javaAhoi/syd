@@ -29,18 +29,10 @@ public class MovieService {
 			
 			//获取电影演员list
 			List<Record> actors = MovieActor.dao.getByMovieId(movie_id, 2);
-//			for(Record r2: actors){
-//				String pinyin = getPinyinByName(r2.getStr("name"));
-//				r2.set("pinyin", pinyin);
-//			}
 			r.set("actors", actors);
 			
 			//获取电影类型list
 			List<Record> types = MovieType.dao.getByMovieId(movie_id, 2);
-//			for(Record r2: types){
-//				String pinyin = getPinyinByName(r2.getStr("name"));
-//				r2.set("pinyin", pinyin);
-//			}
 			r.set("types", types);
 		}
 	}
@@ -53,5 +45,21 @@ public class MovieService {
 	 */
 	public String getPinyinByName(String name){
 		return PinYin.getPinYin(name);
+	}
+	
+	
+	/**
+	 * 获取list中的外键id
+	 * @param list
+	 * @param column
+	 * @return
+	 */
+	public String getIdsByList(List<Record> list, String column){
+		String ids = "";
+		for(Record r : list){
+			Integer fid = r.getInt(column);
+			ids += "[" + fid + "],";
+		}
+		return ids;
 	}
 }

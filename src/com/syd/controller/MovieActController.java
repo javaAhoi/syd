@@ -7,10 +7,10 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.syd.entity.Constant.QueryType;
 import com.syd.entity.MovieActor;
 import com.syd.entity.User;
 import com.syd.shiro.ShiroUtils;
+import com.syd.utils.Constant.QueryType;
 
 /**
  * @author FHC

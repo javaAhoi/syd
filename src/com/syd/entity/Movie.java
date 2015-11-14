@@ -31,14 +31,29 @@ public class Movie extends Model<Movie> {
 
 	public static final Movie dao = new Movie();
 	
+	/**
+	 * 查询列表
+	 * @return
+	 */
 	public List<Record> getList(){
 		String select = " select m.*, l.name as lan, y.name as year ";
 		
 		String sql = " from syd_movie m left join syd_movie_language l on l.id = m.language_id "
 									+ " left join syd_movie_year y on y.id = m.year_id ";
 		
-		
 		return Db.find(select + sql);
+	}
+	
+	
+	/**
+	 * 根据主键id查询对象，left join其他表
+	 * @param id
+	 * @return 
+	 */
+	public Record getInfoById(Object id){
+		String sql = "select m.*, l.`name` as lan_name from syd_movie m left join syd_movie_language l on l.id = m.language_id where m.id = ?";
+		
+		return Db.findFirst(sql, id);
 	}
 	
 	
