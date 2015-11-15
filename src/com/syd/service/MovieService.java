@@ -4,7 +4,10 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Record;
 import com.syd.entity.MovieActor;
+import com.syd.entity.MovieActor2;
+import com.syd.entity.MovieArea2;
 import com.syd.entity.MovieType;
+import com.syd.entity.MovieType2;
 import com.syd.utils.PinYin;
 
 /**
@@ -61,5 +64,18 @@ public class MovieService {
 			ids += "[" + fid + "],";
 		}
 		return ids;
+	}
+	
+	
+	/**
+	 * 删除movie_id相关的外键记录
+	 * @param movie_id
+	 */
+	public void deleteRefTables(Object movie_id){
+		MovieActor2.dao.deleteByMovieId(movie_id);
+		MovieType2.dao.deleteByMovieId(movie_id);
+		MovieArea2.dao.deleteByMovieId(movie_id);
+		
+		
 	}
 }

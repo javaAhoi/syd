@@ -24,7 +24,6 @@ import com.syd.entity.User;
 import com.syd.service.MovieService;
 import com.syd.shiro.ShiroUtils;
 import com.syd.utils.Constant;
-import com.syd.utils.Constant.OperaStr;
 import com.syd.utils.FileUtil;
 
 /**
@@ -134,13 +133,16 @@ public class MovieController extends BaseController {
 	public void save(){
 		
 		try {
-			String opera = getPara("opera");
 			Integer id = getParaToInt("id");
 			
 			Movie record = new Movie();
 			
 			// 更新
-			if(OperaStr.update.getText().equals(opera)){
+			if(id != null){
+				
+				// 删除电影相关联的表
+				MovieService.service.deleteRefTables(id);
+				
 				record.set("id", id);
 				record.update();
 			}
@@ -238,7 +240,7 @@ public class MovieController extends BaseController {
 				record.set("info", info.toString());
 			
 			// 获取图片附件，只在新增时更新附件字段
-			if(OperaStr.create.getText().equals(opera)){
+			if(id == null){
 				Object pks = params.get("fileids");
 				if(pks != null && !pks.equals(""))
 					Attach.dao.updateMovieIdByPks(id, pks.toString());

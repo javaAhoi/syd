@@ -39,7 +39,8 @@ public class Movie extends Model<Movie> {
 		String select = " select m.*, l.name as lan, y.name as year ";
 		
 		String sql = " from syd_movie m left join syd_movie_language l on l.id = m.language_id "
-									+ " left join syd_movie_year y on y.id = m.year_id ";
+									+ " left join syd_movie_year y on y.id = m.year_id"
+									+ " order by m.create_time desc";
 		
 		return Db.find(select + sql);
 	}

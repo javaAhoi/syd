@@ -1,5 +1,6 @@
 package com.syd.entity;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 
 /**
@@ -16,4 +17,14 @@ public class MovieArea2 extends Model<MovieArea2> {
 	public static final MovieArea2 dao = new MovieArea2();
 	
 	
+	/**
+	 * 根据movie_id删除
+	 * @param movie_id
+	 * @return 
+	 */
+	public int deleteByMovieId(Object movie_id){
+		String sql = "delete from syd_movie_area_2_m where movie_id = ?";
+		
+		return Db.update(sql, movie_id);
+	}
 }
