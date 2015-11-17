@@ -167,7 +167,7 @@ public class MovieController extends BaseController {
 			if(sytime != null && !sytime.equals(""))
 				record.set("sy_time", sytime);
 			
-			// 遍历类型id， 保存到syd_movie_type_2_m表
+			// 1.遍历类型id， 保存到syd_movie_type_2_m表
 			Object typeids = params.get("typeids");
 			if(typeids != null && !typeids.equals("")){
 				String[] ids = typeids.toString().split(",");
@@ -179,12 +179,12 @@ public class MovieController extends BaseController {
 				}
 			}
 
-			// 获取年代id， 保存到syd_movie_year表
+			// 2.获取年代id， 保存到syd_movie_year表
 			Object yearid = params.get("yearid");
 			if(yearid != null && !yearid.equals(""))
 				record.set("year_id", yearid);
 			
-			// 遍历地区id， 保存到syd_movie_area_2_m表
+			// 3.遍历地区id， 保存到syd_movie_area_2_m表
 			Object areaids = params.get("areaids");
 			if(areaids != null && !areaids.equals("")){
 				String[] ids = areaids.toString().split(",");
@@ -196,12 +196,12 @@ public class MovieController extends BaseController {
 				}
 			}
 			
-			// 获取语种，保存到syd_movie_language
+			// 4.获取语种，保存到syd_movie_language
 			Object languageid = params.get("languageid");
 			if(languageid != null && !languageid.equals(""))
 				record.set("language_id", languageid);
 			
-			// 获取演员， 查询该演员是否存在；
+			// 5.获取演员， 查询该演员是否存在；
 			// 若不存在，则先保存到syd_movie_actor表，在保存到syd_movie_actor_2_m表
 			// 若存在，则保存到syd_movie_actor_2_m表
 			Object actors = params.get("actors");
@@ -234,18 +234,17 @@ public class MovieController extends BaseController {
 				}
 			}
 			
-			// 获取简介
+			// 6.获取简介
 			Object info = params.get("info");
 			if(info != null && !info.equals(""))
 				record.set("info", info.toString());
 			
-			// 获取图片附件，只在新增时更新附件字段
+			// 7.获取图片附件，只在新增时更新附件字段
 			if(id == null){
 				Object pks = params.get("fileids");
 				if(pks != null && !pks.equals(""))
 					Attach.dao.updateMovieIdByPks(id, pks.toString());
 			}
-			
 			
 			record.set("update_time", new Date());
 			record.update();
@@ -270,8 +269,8 @@ public class MovieController extends BaseController {
 		// 重命名
 		File file = FileUtil.renameToUniqueFileName(uploadFile);
 		
-		// 压缩图片，并返回图片地址
-		String url = FileUtil.compressPic(Constant.maxPicSize, file);
+		// 压缩图片，并返回图片地址	（内容截图尺寸：900*500）
+		String url = FileUtil.compressPic(Constant.maxPicSize, file, Constant.imgWidthDetail, Constant.imgHeightDetail);
 		
 		// 获取自定义参数，如果有movie_id则保存movie_id
 		String qqfilename = getPara("qqfilename");
@@ -288,6 +287,122 @@ public class MovieController extends BaseController {
 		((JsonRender) getRender()).forIE();	//IE兼容
 	}
 	
+	
+	/**
+	 * 设置图片为封面图片
+	 */
+	@Before(Tx.class)
+	public void setIndexImg(){
+		
+		boolean result = false;
+		
+		try {
+
+			// 获取图片对象
+			Integer attach_id = getParaToInt("attach_id");
+			Attach attach = Attach.dao.findById(attach_id);
+			
+			String url = attach.get("url");
+			File new_file = new File(url);
+			
+			// 压缩封面图片，并返回图片地址	（封面图片尺寸：150*200）
+			String new_url = FileUtil.compressPic(Constant.maxPicSize, new_file, Constant.imgWidthIndex, Constant.imgHeightIndex);
+			
+			// 更新
+			attach.set("url", new_url);
+			attach.set("is_index", 1);
+			
+			result = attach.save();
+			
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		renderJson(result);
+	}
+	
+	
+	/**
+	 * 删除图片
+	 */
+	@Before(Tx.class)
+	public void deleteImg(){
+
+		boolean result = false;
+		
+		try {
+			Integer attach_id = getParaToInt("attach_id");
+			
+			// 删除
+			result = Attach.dao.deleteById(attach_id);
+			
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		renderJson(result);
+	}
+	
+	/**
+	 * 增加点击次数 
+	 */
+	@Before(Tx.class)
+	public void click(){
+
+		boolean result = false;
+		
+		try {
+			Integer movie_id = getParaToInt("movie_id");
+			
+			// 更新， 将‘点击’字段自增1
+			Movie record = Movie.dao.findById(movie_id);
+			if(record != null){
+				Integer click_count = record.getInt("click_count");
+				click_count ++ ;
+				record.set("click_count", click_count);
+
+				result = record.update();
+			}
+			
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		renderJson(result);
+	}
+	
+	
+	/**
+	 * 点击赞/喜欢 
+	 */
+	@Before(Tx.class)
+	public void clickLike(){
+
+		boolean result = false;
+		
+		try {
+			Integer movie_id = getParaToInt("movie_id");
+			
+			// 更新， 将‘喜欢’字段自增1
+			Movie record = Movie.dao.findById(movie_id);
+			if(record != null){
+				Integer likecount = record.getInt("like_count");
+				likecount ++ ;
+				record.set("like_count", likecount);
+
+				result = record.update();
+			}
+			
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		renderJson(result);
+	}
 	
 }
 

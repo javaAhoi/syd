@@ -142,7 +142,7 @@ public class FileUtil {
 	/**
 	 * @return 返回值包含路径名:"upload/movieImg/1.jpg" 
 	 */
-	public static String compressPic(long maxPicSize, File file) {
+	public static String compressPic(long maxPicSize, File file, int width, int height) {
 		if(file != null && file.exists()){
 			ImageCompressUtil im = new ImageCompressUtil(false);
 			String fileName = file.getAbsolutePath();
@@ -158,7 +158,7 @@ public class FileUtil {
 			File newFile = new File(newFileName);
 			
 			// 压缩图片尺寸为：150*200  ，并修改原有尺寸比例
-			boolean success = im.compressPic(file, newFile, Constant.imgWidth, Constant.imgHeight, Constant.Bfalse);
+			boolean success = im.compressPic(file, newFile, width, height, Constant.Bfalse);
 			if(success){
 				return SydResource.MovieImgFolder.getPath()+newFile.getName();
 			}

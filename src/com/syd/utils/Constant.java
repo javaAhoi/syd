@@ -45,9 +45,14 @@ public class Constant {
 	// 上传图片压缩大小：2M
 	public static final long maxPicSize = 2*1024*1000L;
 	
-	// 压缩图片尺寸：150*200
-	public static final int imgWidth = 150;
-	public static final int imgHeight = 200;
+	// 压缩图片
+	// 封面图片尺寸：150*200
+	public static final int imgWidthIndex = 150;
+	public static final int imgHeightIndex = 200;
+	
+	// 内容截图尺寸：
+	public static final int imgWidthDetail = 900;
+	public static final int imgHeightDetail = 500;
 	
 	// 压缩时是否保持原有尺寸
 	public static final boolean Btrue = true;
