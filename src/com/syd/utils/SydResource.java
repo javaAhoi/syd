@@ -2,7 +2,7 @@ package com.syd.utils;
 
 public enum SydResource {
 
-	MovieImgFolder(0, "upload/movieImg/",true),
+	MovieImgFolder(0, "/upload/",true),
 	
 	;
 	

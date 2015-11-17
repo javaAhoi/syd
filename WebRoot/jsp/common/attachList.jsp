@@ -13,7 +13,10 @@
 					<c:forEach items="${attachList}" var="attach">
 						<li style="background-color: #F5F8FA;">
 							<span class="qq-upload-file-selector qq-upload-file">
-								<span><a class="annex" href="${ctx}${attach.url}" target="_blank">${attach.name}</a></span>
+								<span>
+									<a class="annex" href="${ctx}${attach.url}" target="_blank">${attach.name}</a>
+									<a href="${ctx}/movie/setIndexImg?attach_id=${attach.id}" target="_blank">设为封面</a>
+								</span>
 								<span style="float: right;"><fmt:formatDate value="${attach.create_time }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 							</span> 
 						</li>

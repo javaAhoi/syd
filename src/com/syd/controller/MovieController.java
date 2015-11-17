@@ -25,6 +25,7 @@ import com.syd.service.MovieService;
 import com.syd.shiro.ShiroUtils;
 import com.syd.utils.Constant;
 import com.syd.utils.FileUtil;
+import com.syd.utils.SydResource;
 
 /**
  * @author FHC
@@ -239,12 +240,12 @@ public class MovieController extends BaseController {
 			if(info != null && !info.equals(""))
 				record.set("info", info.toString());
 			
-			// 7.获取图片附件，只在新增时更新附件字段
-			if(id == null){
+			// 7.获取图片附件
+//			if(id == null){
 				Object pks = params.get("fileids");
 				if(pks != null && !pks.equals(""))
 					Attach.dao.updateMovieIdByPks(id, pks.toString());
-			}
+//			}
 			
 			record.set("update_time", new Date());
 			record.update();
@@ -263,8 +264,15 @@ public class MovieController extends BaseController {
 	@Before(Tx.class)
 	public void saveAttach(){
 		
-		// 保存文件到服务器
-		UploadFile uploadFile = getFile();
+		// 保存文件到服务器:"/E:/apache-tomcat-7.0.57/wtpwebapps/syd/WEB-INF/classes/"
+		String absoluteurl = getClass().getClassLoader().getResource("").getPath();
+		
+		int index = absoluteurl.indexOf("syd/");
+		absoluteurl = absoluteurl.substring(0, index+3) + SydResource.MovieImgFolder.getPath();
+		
+		UploadFile uploadFile = getFile("qqfile", absoluteurl);
+		
+		
 		
 		// 重命名
 		File file = FileUtil.renameToUniqueFileName(uploadFile);
@@ -302,8 +310,14 @@ public class MovieController extends BaseController {
 			Integer attach_id = getParaToInt("attach_id");
 			Attach attach = Attach.dao.findById(attach_id);
 			
-			String url = attach.get("url");
-			File new_file = new File(url);
+			
+			// 保存文件到服务器:"/E:/apache-tomcat-7.0.57/wtpwebapps/syd/WEB-INF/classes/"
+			String absoluteurl = getClass().getClassLoader().getResource("").getPath();
+			int index = absoluteurl.indexOf("syd/");
+			absoluteurl = absoluteurl.substring(0, index+3);
+			
+//			String url = attach.get("url");
+			File new_file = new File(absoluteurl + attach.getStr("url"));
 			
 			// 压缩封面图片，并返回图片地址	（封面图片尺寸：150*200）
 			String new_url = FileUtil.compressPic(Constant.maxPicSize, new_file, Constant.imgWidthIndex, Constant.imgHeightIndex);
@@ -312,7 +326,7 @@ public class MovieController extends BaseController {
 			attach.set("url", new_url);
 			attach.set("is_index", 1);
 			
-			result = attach.save();
+			result = attach.update();
 			
 		} catch (Exception e) {
 			result = false;
