@@ -21,11 +21,11 @@ import com.syd.entity.MovieType;
 import com.syd.entity.MovieType2;
 import com.syd.entity.MovieYear;
 import com.syd.entity.User;
+import com.syd.exception.JsonResult;
 import com.syd.service.MovieService;
 import com.syd.shiro.ShiroUtils;
 import com.syd.utils.Constant;
 import com.syd.utils.FileUtil;
-import com.syd.utils.SydResource;
 
 /**
  * @author FHC
@@ -98,6 +98,16 @@ public class MovieController extends BaseController {
 			// 图片附件list
 			List<Record> attachList = Attach.dao.getByMovieId(movie_id);
 			setAttr("attachList", attachList);
+
+			// 若该对象已经有封面图片，则不再设置封面
+			List<Record> temp = Attach.dao.getByMovieIdIndex(movie_id);
+			if(temp != null && temp.size() > 0){
+				setAttr("setIndex", false);
+			}else{
+				setAttr("setIndex", true);
+			}
+			
+			
 		}
 		
 		
@@ -264,15 +274,7 @@ public class MovieController extends BaseController {
 	@Before(Tx.class)
 	public void saveAttach(){
 		
-		// 保存文件到服务器:"/E:/apache-tomcat-7.0.57/wtpwebapps/syd/WEB-INF/classes/"
-		String absoluteurl = getClass().getClassLoader().getResource("").getPath();
-		
-		int index = absoluteurl.indexOf("syd/");
-		absoluteurl = absoluteurl.substring(0, index+3) + SydResource.MovieImgFolder.getPath();
-		
-		UploadFile uploadFile = getFile("qqfile", absoluteurl);
-		
-		
+		UploadFile uploadFile = getFile();
 		
 		// 重命名
 		File file = FileUtil.renameToUniqueFileName(uploadFile);
@@ -302,7 +304,9 @@ public class MovieController extends BaseController {
 	@Before(Tx.class)
 	public void setIndexImg(){
 		
-		boolean result = false;
+		JsonResult jr = new JsonResult(null);
+		
+		boolean flag = false;
 		
 		try {
 
@@ -310,13 +314,10 @@ public class MovieController extends BaseController {
 			Integer attach_id = getParaToInt("attach_id");
 			Attach attach = Attach.dao.findById(attach_id);
 			
+			// 获取文件保存路径
+			String absoluteurl = getFileDir();
 			
-			// 保存文件到服务器:"/E:/apache-tomcat-7.0.57/wtpwebapps/syd/WEB-INF/classes/"
-			String absoluteurl = getClass().getClassLoader().getResource("").getPath();
-			int index = absoluteurl.indexOf("syd/");
-			absoluteurl = absoluteurl.substring(0, index+3);
-			
-//			String url = attach.get("url");
+			// 获取该文件对象
 			File new_file = new File(absoluteurl + attach.getStr("url"));
 			
 			// 压缩封面图片，并返回图片地址	（封面图片尺寸：150*200）
@@ -326,14 +327,18 @@ public class MovieController extends BaseController {
 			attach.set("url", new_url);
 			attach.set("is_index", 1);
 			
-			result = attach.update();
+			flag = attach.update();
 			
 		} catch (Exception e) {
-			result = false;
+			flag = false;
+			jr.setMsg(e.getMessage());
+			
 			e.printStackTrace();
+		} finally {
+			jr.setFlag(flag);
 		}
 		
-		renderJson(result);
+		renderJson(jr);
 	}
 	
 	
@@ -343,20 +348,36 @@ public class MovieController extends BaseController {
 	@Before(Tx.class)
 	public void deleteImg(){
 
-		boolean result = false;
+		JsonResult jr = new JsonResult(null);
+		
+		boolean flag = false;
 		
 		try {
 			Integer attach_id = getParaToInt("attach_id");
+			Attach attach = Attach.dao.findById(attach_id);
+			
+			// 获取文件保存路径
+			String absoluteurl = getFileDir();
+			
+			// 获取该文件对象
+			File new_file = new File(absoluteurl + attach.getStr("url"));
+			
+			// 删除文件
+			FileUtil.deleteFile(new_file);
 			
 			// 删除
-			result = Attach.dao.deleteById(attach_id);
+			flag = Attach.dao.deleteById(attach_id);
 			
 		} catch (Exception e) {
-			result = false;
+			flag = false;
+			jr.setMsg(e.getMessage());
+			
 			e.printStackTrace();
+		} finally {
+			jr.setFlag(flag);
 		}
 		
-		renderJson(result);
+		renderJson(jr);
 	}
 	
 	/**

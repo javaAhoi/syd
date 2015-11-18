@@ -15,12 +15,20 @@
 							<span class="qq-upload-file-selector qq-upload-file">
 								<span>
 									<a class="annex" href="${ctx}${attach.url}" target="_blank">${attach.name}</a>
-									<a href="${ctx}/movie/setIndexImg?attach_id=${attach.id}" target="_blank">设为封面</a>
+									<c:if test="${setIndex}">
+										<a href="javascript:;" class="index-btn" data-id="${attach.id}">设为封面</a>
+									</c:if>
+									<c:if test="${attach.is_index eq 1}">
+										<span style="font-size: 14px;color: red;margin-left: 25px;">*该图片为封面图片*</span>
+									</c:if>
 								</span>
-								<span style="float: right;"><fmt:formatDate value="${attach.create_time }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+								<span style="float: right;">
+									<fmt:formatDate value="${attach.create_time }" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<a href="javascript:;" class="del-btn" data-id="${attach.id}">删除</a>
+								</span>
 							</span> 
 						</li>
-					</c:forEach>
+					</c:forEach> 
 				</ul>
 				
 				<div id="manual-fine-uploader"></div>
@@ -85,6 +93,51 @@
 						};
 						manualuploader = $('#manual-fine-uploader').fineUploader(opt);
 					}
+					
+					
+					//删除 操作
+					$(function(){
+						$('.del-btn').click(function(){
+							if(window.confirm('确认删除吗？')){
+								var id = $(this).attr('data-id');
+								$.ajax({
+									type : 'post',
+									url : '${ctx}/movie/deleteImg?attach_id='+id,
+									success : function(result){
+										if(data.flag){
+											util.success('删除成功！');
+											window.location.reload();
+										}else{
+											util.error(data.msg);
+										}
+									}
+								});
+							}
+						});
+					});
+
+					
+					//设置为封面操作
+					$(function(){
+						$('.index-btn').click(function(){
+							if(window.confirm('确认设置封面吗？')){
+								var id = $(this).attr('data-id');
+								$.ajax({
+									type : 'post',
+									url : '${ctx}/movie/setIndexImg?attach_id='+id,
+									success : function(data){
+										if(data.flag){
+											util.success('设置成功！');
+											window.location.reload();
+										}else{
+											util.error(data.msg);
+										}
+									}
+								});
+							}
+						});
+					});
+					
 				</script>
 				
 				

@@ -32,6 +32,18 @@ public class Attach extends Model<Attach> {
 		
 		return Db.find(sql, movie_id);
 	}
+
+	
+	/**
+	 * 根据movie_id获取附件列表
+	 * @param movie_id
+	 * @return 
+	 */
+	public List<Record> getByMovieIdIndex(Object movie_id){
+		String sql = "select * from syd_movie_attach where movie_id = ? and is_index = 1";
+		
+		return Db.find(sql, movie_id);
+	}
 	
 	
 	/**

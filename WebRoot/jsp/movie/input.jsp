@@ -245,6 +245,12 @@
 				
 				// 初始化附件上传插件
 				initUploader();
+				
+				
+				$('.qq-upload-list-selector.qq-upload-list.list li').each(function(){
+					$(this).css('background', '#ECEDED;');
+				});
+				
 
 				// 添加一个演员
 				$('.add-actor').click(function(){

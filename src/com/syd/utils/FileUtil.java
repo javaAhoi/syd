@@ -166,4 +166,24 @@ public class FileUtil {
 		
 		return SydResource.MovieImgFolder.getPath()+file.getName();
 	}
+
+	
+	/**
+	 * 删除图片
+	 * @return
+	 */
+	public static boolean deleteFile(File file){
+		
+		boolean flag = false;
+		
+		// 路径为文件且不为空则进行删除  
+	    if (file.isFile() && file.exists()) {  
+	        file.delete();  
+	        flag = true;  
+	    }  else{
+	    	System.err.println("文件不存在！");
+	    }
+		
+		return flag;
+	}
 }

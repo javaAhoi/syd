@@ -31,6 +31,22 @@ public class BaseController extends Controller {
 		
 		return params;
 	}
+	
+	
+	/**
+	 * 获取文件保存路径
+	 * @return
+	 */
+	public String getFileDir(){
+		// 保存文件到服务器:"/E:/apache-tomcat-7.0.57/wtpwebapps/syd/WEB-INF/classes/"
+		String absoluteurl = getClass().getClassLoader().getResource("").getPath();
+		int index = absoluteurl.indexOf("syd/");
+		
+		// absoluteurl: /E:/apache-tomcat-7.0.57/wtpwebapps/syd
+		absoluteurl = absoluteurl.substring(0, index+3);
+		
+		return absoluteurl;
+	}
 }
 
 
