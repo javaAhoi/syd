@@ -5,16 +5,15 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
 import com.jfinal.aop.Interceptor;
-import com.jfinal.core.ActionInvocation;
+import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.syd.utils.DateUtils2;
-
 /**
  * @描述: 设置一些公共的属性
  * @时间: 2015年7月6日下午5:11:38
  */
 public class MyInterceptor implements Interceptor {
-	private void setAttr(ActionInvocation ai) {
+	private void setAttr(Invocation ai) {
 
 		Controller controller = ai.getController();		//访问的action
 		
@@ -43,11 +42,17 @@ public class MyInterceptor implements Interceptor {
 	}
 
 
+//	@Override
+//	public void intercept(ActionInvocation ai) {
+//	}
+
+
 	@Override
-	public void intercept(ActionInvocation ai) {
-	 
-		setAttr(ai);
+	public void intercept(Invocation  ai) {
+		 
+			setAttr(ai);
+			
+			ai.invoke();
 		
-		ai.invoke();
 	}
 }

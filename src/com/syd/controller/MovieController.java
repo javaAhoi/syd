@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.cnksi.gendoc.annotations.DocAction;
+import com.cnksi.gendoc.annotations.DocPara;
+import com.cnksi.gendoc.annotations.DocParas;
+import com.cnksi.gendoc.annotations.DocResponse;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -41,6 +45,13 @@ public class MovieController extends BaseController {
 	/**
 	 * 获取电影列表
 	 */
+	@DocAction(comment = "红外测温报告列表接口")
+	@DocParas({
+			@DocPara(comment = "变电站名称（模糊查询）", exampleValue = "220", name = "search_LIKE__bdz_name"),
+			@DocPara(comment = "创建时间（开始）", exampleValue = "2016-01-01", name = "search_GTE__insert_time"),
+			@DocPara(comment = "创建时间（结束）", exampleValue = "2016-12-31", name = "search_LTE__insert_time"),
+			@DocPara(comment = "当前页", exampleValue = "1", name = "pageNum")})
+	@DocResponse(selectSql = "select * from syd_movie")			//返回值的说明。直接读取数据库中字段的注解，可以用指定的字段名称代替*，支持多表联合查询，支持字段别名
 	public void list(){
 		setAttr("user", userInfo);
 		

@@ -97,9 +97,10 @@ public class FileUtil {
 	public static File rename(UploadFile file, String name){
 
 		//原来File对象
-		String path = file.getSaveDirectory();
-		String originalFileName = file.getFileName();
-		File f = new File(path + "\\" + originalFileName);
+//		String path = file.getSaveDirectory();
+//		String originalFileName = file.getFileName();
+//		File f = new File(path + "\\" + originalFileName);
+		File f = file.getFile();
 		
 		//新的file对象
 		String destpath = f.getParent() + File.separator + name;

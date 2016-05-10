@@ -1,5 +1,6 @@
 package com.syd;
 
+import com.cnksi.gendoc.jfinal.DocController;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -57,6 +58,8 @@ public class SydConfig extends JFinalConfig {
 	 * 配置路由
 	 */
 	public void configRoute(Routes me) {
+		me.add("/jfinal/doc", DocController.class, "/jfinal/doc");
+		
 		me.add("/", IndexController.class, "/");	
 		me.add("/user", UserController.class, "/user");	
 		me.add("/movie", MovieController.class, "/movie");	
@@ -129,4 +132,5 @@ public class SydConfig extends JFinalConfig {
 	public static void main(String[] args) {
 		JFinal.start("WebRoot", 82, "/", 5);
 	}
+	
 }

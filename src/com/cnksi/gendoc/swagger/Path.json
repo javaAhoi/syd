@@ -1,0 +1,58 @@
+{
+	"get": {
+		"summary": "测试使用swagger管理接口",
+		"description": "description",
+		"parameters": [
+			{
+				"name": "username",
+				"in": "query",
+				"description": "用户名",
+				"required": false,
+				"type": "string",
+				"default": "1"
+			}
+		],
+		"responses": {
+			"200": {
+				"description": "字段说明",
+				"schema": {
+					"type": "object",
+					"properties": {
+						"username": {
+							"type": "string",
+							"description": "用户登录名"
+						},
+						"fullname": {
+							"type": "string",
+							"description": "用户真实姓名"
+						},
+						"position": {
+							"type": "string",
+							"description": "用户岗位/职务"
+						},
+						"age": {
+							"type": "string",
+							"format": "int32",
+							"description": "年龄"
+						},
+						"sex": {
+							"type": "string",
+							"description": "性别"
+						},
+						"departmentId": {
+							"type": "integer",
+							"format": "int32",
+							"description": "部门Id"
+						},
+						"departmentName": {
+							"description": "部门名"
+						},
+						"userRoles": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}
